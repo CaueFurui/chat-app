@@ -6,17 +6,11 @@ import Join from './Join';
 
 export default function Home() {
   const [recvMessages, setRecvMessages] = useState([]);
-  const [hasJoined, setHasJoined] = useState(false);
   const socket = useRef(null);
 
   function onSend(messages) {
     socket.current.emit("message", messages[0].text);
     setRecvMessages(prevState => GiftedChat.append(prevState, messages))
-  }
-
-  function joinChat(username) {
-    socket.current.emit("join", username);
-    setHasJoined(true);
   }
 
   useEffect(() => {
@@ -28,7 +22,6 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
-      {hasJoined ? 
       <GiftedChat
         renderUsernameOnMessage
         messages={recvMessages}
@@ -36,10 +29,7 @@ export default function Home() {
         user={{
           _id: 1,
         }}
-      /> :
-      <Join joinChat={joinChat} />
-      }
-      
+      />
     </View>
   );
 }

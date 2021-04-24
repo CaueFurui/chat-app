@@ -1,8 +1,18 @@
 import React, {useState} from 'react';
-import { View, TextInput, Image, Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, TextInput, Image, Button, Platform, KeyboardAvoidingView, Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
-export default function Join ({joinChat}) {
+export default function Join () {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('')
+
+  function joinChat(username) {
+    if(!username) {
+      return Alert.alert("Type a username")
+    }
+    socket.current.emit("join", username);
+    navigation.navigate('Home');
+  }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

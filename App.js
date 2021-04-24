@@ -1,9 +1,9 @@
 import React from 'react';
-import Home from './screens/Home';
+import AppContainer from './screens/AppContainer';
 
 export default function App() {
   return (
-    <Home/>
+    <AppContainer/>
   );
 }
 
