@@ -22,6 +22,9 @@
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
     "react-native-web": "~0.13.12",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-socket.io": "^1.4.0",
     "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
