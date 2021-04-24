@@ -14,6 +14,11 @@ export default function Home() {
     setRecvMessages(prevState => GiftedChat.append(prevState, messages))
   }
 
+  function joinChat(username) {
+    socket.current.emit("join", username);
+    setHasJoined(true);
+  }
+
   useEffect(() => {
     socket.current = io('http://192.168.0.13:3001');
     socket.current.on("message", message => {
@@ -25,13 +30,14 @@ export default function Home() {
     <View style={{ flex: 1 }}>
       {hasJoined ? 
       <GiftedChat
+        renderUsernameOnMessage
         messages={recvMessages}
         onSend={messages => onSend(messages)}
         user={{
           _id: 1,
         }}
       /> :
-      <Join />
+      <Join joinChat={joinChat} />
       }
       
     </View>
