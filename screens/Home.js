@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View } from 'react-native';
 import io from 'socket.io-client'
 import { GiftedChat } from 'react-native-gifted-chat'
+import Join from './Join';
 
 export default function Home() {
   const [recvMessages, setRecvMessages] = useState([]);
+  const [hasJoined, setHasJoined] = useState(false);
   const socket = useRef(null);
 
   function onSend(messages) {
@@ -21,13 +23,17 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
+      {hasJoined ? 
       <GiftedChat
         messages={recvMessages}
         onSend={messages => onSend(messages)}
         user={{
           _id: 1,
         }}
-      />
+      /> :
+      <Join />
+      }
+      
     </View>
   );
 }
